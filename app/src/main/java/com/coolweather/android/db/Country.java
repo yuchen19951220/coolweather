@@ -1,6 +1,8 @@
 package com.coolweather.android.db;
 
-public class Country {
+import org.litepal.crud.LitePalSupport;
+
+public class Country extends LitePalSupport {
     private int id;
     private String countryName;
     private String weatherId;
