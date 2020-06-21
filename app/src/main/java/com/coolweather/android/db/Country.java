@@ -2,6 +2,7 @@ package com.coolweather.android.db;
 
 import org.litepal.crud.LitePalSupport;
 
+//Contry县对象数据库
 public class Country extends LitePalSupport {
     private int id;
     private String countryName;

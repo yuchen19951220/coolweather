@@ -4,6 +4,7 @@ import org.litepal.crud.LitePalSupport;
 
 import java.sql.DatabaseMetaData;
 
+//数据库bean Province
 public class Province extends LitePalSupport {
     private int id;
     private String provinceName;

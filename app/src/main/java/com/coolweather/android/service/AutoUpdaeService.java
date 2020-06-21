@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.coolweather.android.gson.Weather;
 import com.coolweather.android.util.HttpUtil;
@@ -22,6 +24,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class AutoUpdaeService extends Service {
+    private static final String TAG = "AutoUpdaeService";
     public AutoUpdaeService() {
     }
 
@@ -34,8 +37,9 @@ public class AutoUpdaeService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         updateWeather();
         updateBingPic();
+        Log.d(TAG, "onStartCommand: updata complete");
         AlarmManager manager=(AlarmManager) getSystemService(ALARM_SERVICE);
-        int anHour=8*60*60*1000;//8小时
+        int anHour=1000;//8小时
         long triggerAtTime= SystemClock.elapsedRealtime()+anHour;
         Intent i=new Intent(this,AutoUpdaeService.class);
         PendingIntent pi=PendingIntent.getActivity(this,0,i,0);

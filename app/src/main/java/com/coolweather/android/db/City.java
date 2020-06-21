@@ -2,6 +2,7 @@ package com.coolweather.android.db;
 
 import org.litepal.crud.LitePalSupport;
 
+//数据库Bean对象 city
 public class City extends LitePalSupport {
     private int id;
     private String cityName;

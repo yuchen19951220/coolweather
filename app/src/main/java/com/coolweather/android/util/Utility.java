@@ -55,7 +55,7 @@ public class Utility {
         return false;
     }
 
-    //解析和处理服务器返回的县级数据
+    //解析和处理服务器返回的县级数据 存入数据库
     public static boolean handleCountryResponse(String response, int cityId){
         if(!TextUtils.isEmpty(response)){
             try {
@@ -76,13 +76,14 @@ public class Utility {
         return false;
     }
 
+//处理具体Weather信息
 
     public static Weather handleWeatherResponse(String response){
         try {
             JSONObject jsonObject=new JSONObject(response);
             JSONArray jsonArray=jsonObject.getJSONArray("HeWeather");
             String weatherContent=jsonArray.getJSONObject(0).toString();
-
+            //通过GSOn解析到Weather类
             Weather returnG= new Gson().fromJson(weatherContent,Weather.class);
 
             return  returnG;

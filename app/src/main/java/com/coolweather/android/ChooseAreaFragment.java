@@ -119,6 +119,8 @@ public class ChooseAreaFragment extends Fragment {
                 }
             }
         });
+
+        //最开始展示的时province界面 并将level设为province
         queryPronvince();
     }
 
@@ -126,6 +128,7 @@ public class ChooseAreaFragment extends Fragment {
     private void queryPronvince() {
         titleText.setText("中国");
         backButton.setVisibility(View.GONE);
+        // 从数据库中查询所有Province表中对象
         provinceList= LitePal.findAll(Province.class);
         if (provinceList.size()>0){
             dataList.clear();
@@ -133,6 +136,7 @@ public class ChooseAreaFragment extends Fragment {
                  provinceList) {
                 dataList.add(province.getProvinceName());
             }
+            //数据改变提示更新
             adapter.notifyDataSetChanged();
             listView.setSelection(0);
             currentLevel=LEVEL_PROVINCE;
@@ -152,6 +156,7 @@ public class ChooseAreaFragment extends Fragment {
                 cityList) {
                 dataList.add(city.getCityName());
             }
+            //数据更新 提示更新
             adapter.notifyDataSetChanged();
             listView.setSelection(0);
             currentLevel=LEVEL_CITY;
@@ -187,7 +192,7 @@ public class ChooseAreaFragment extends Fragment {
     }
 
 
-    //根据传入的地址和类型从服务器上查询省市县数据
+    //根据传入的地址和类型从服务器上查询省市县数据 根据类型采用不同的函数解析结果
     private void queryFromServer(final String address, final String type) {
         showProgressDialog();
         HttpUtil.sendOkhttpRequest(address, new Callback() {
@@ -207,14 +212,18 @@ public class ChooseAreaFragment extends Fragment {
                 String responseText=response.body().string();
                 boolean result=false;
                 if ("province".equals(type)){
+                    //处于中国 查询到所有省份数据 并解析
                     result= Utility.handleProvinceResponse(responseText);
                 } else if ("city".equals(type)){
+                    //处于省份 查询所有市数据 并解析
                     result=Utility.handleCityResponse(responseText,selectedProvince.getId());
                 } else if("country".equals(type)){
+                    //处于市 查询所有县数据
                     result=Utility.handleCountryResponse(responseText,selectedCity.getId());
                 }
 
                 if(result){
+                    //切换到主线程中更新
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
