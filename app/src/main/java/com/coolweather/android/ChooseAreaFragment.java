@@ -91,7 +91,7 @@ public class ChooseAreaFragment extends Fragment {
                     queryCounties();
                 } else if (currentLevel==LEVEL_COUNTY){
                     String weatherId=countryList.get(position).getWeatherId();
-                    if (getActivity() instanceof WeatherActivity){
+                    if (getActivity() instanceof MainActivity){
                         //在主视图中
                         Intent intent =new Intent(getActivity(), WeatherActivity.class);
                         intent.putExtra("weather_id",weatherId);
