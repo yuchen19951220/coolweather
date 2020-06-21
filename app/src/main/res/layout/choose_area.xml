@@ -20,12 +20,13 @@
             android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_launcher_background"/>
+            android:background="@drawable/ic_menu"/>
     </RelativeLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#fff"
         android:id="@+id/list_view"/>
 
 </LinearLayout>
